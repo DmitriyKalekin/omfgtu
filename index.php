@@ -13,4 +13,13 @@ header("Status: 200 OK");
 //$ctl->{action}();
 $ctl->index();
 
+
+$tree_model = new \MVC\Model\TreeModel();
+
+$result = $tree_model->getTree(); // array("id"=>1)
+
+vd($result);
+
+
+\core\Db::close();
 ?>

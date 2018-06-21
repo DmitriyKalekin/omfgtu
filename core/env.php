@@ -79,7 +79,7 @@ function __autoload($class_name)
 
 
 
-$mysqli = new mysqli($config["dbhost"], $config["dbuser"], $config["dbpwd"], $config["dbname"]);
+$mysqli = \core\Db::getInstance();   //new mysqli($config["dbhost"], $config["dbuser"], $config["dbpwd"], $config["dbname"]);
 
 
 
