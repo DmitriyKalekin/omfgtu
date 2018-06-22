@@ -14,10 +14,13 @@ class Router
 
         $ctl = @$parts[1];
         $action = @$parts[2];
+        $rowNumber = @$parts[3];
     
         $this->ctl = $ctl;
         $this->action = $action;
-        return array($ctl, $action);
+        $this->rowNumber = $rowNumber;
+
+        return array($ctl, $action, $rowNumber);
     }
 
     public function getCtl()
@@ -26,6 +29,7 @@ class Router
         
         $ctl = new $class_name();
         $ctl->action = $this->action;
+        $ctl->rowNumber = $this->rowNumber;
         
         return new $class_name();
     }   

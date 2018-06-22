@@ -14,10 +14,10 @@ class UserController extends \MVC\Ctl\Controller
 		echo $html;
 	}
 
-	public function info()
+	public function info($params, $rowNumber)
 	{
 		$user_model = new \MVC\Model\UserModel();
-		$result = $user_model->getUser(); // array("id"=>1)
+		$result = $user_model->getUser($rowNumber); // array("id"=>1)
 		\core\Db::close();
 		$view = new \MVC\View\UserDetailsView();
 		$html = $view->showUserInfo($result);

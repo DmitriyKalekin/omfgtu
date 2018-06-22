@@ -5,14 +5,11 @@
                 <th>surname</th>
             </tr>
         </thead>
-        <tbody>
-            <?php 
-		foreach ($result as $row) {?>
+        <tbody> 
             <tr>
-                <td><?php echo $row['name'];?></td>
-                <td><?php echo $row['surname'];?></td>
+                <td><?php echo $result[0]['name'];?></td>
+                <td><?php echo $result[0]['surname'];?></td>
             </tr>
-            <?php } // end foreach?>
         </tbody>
         </table>
         <td><a href="/user/show">back</a></td>

@@ -12,10 +12,11 @@ header("Status: 200 OK");
 
 if ($_SERVER["REQUEST_METHOD"]=="POST")
 {
+
     $ret = $ctl->do_action($_POST["action"]);
 }
 
-$ctl->run($router->action, $_REQUEST);
+$ctl->run($router->action, $router->rowNumber, $_REQUEST);
 
 \core\Db::close();
 

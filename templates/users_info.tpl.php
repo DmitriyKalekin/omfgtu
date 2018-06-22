@@ -9,11 +9,10 @@
         <a href="/user/createform">create</a>
             <?php 
 		foreach ($result as $row) {?>
-            <tr>
-                <td style="display:none;"><?php echo $row['id'];?></td>
+            <tr id = <?php echo $row['id']?>>
                 <td><?php echo $row['name'];?></td>
                 <td><?php echo $row['surname'];?></td>
-                <td><a href="/user/info">details</a></td>
+                <td><a href="/user/info/<?php echo $row['id'];?>">details</a></td>
                 <td><a href="/user/editform">edit</a></td>
                 <td><a href="/user/deleteUser">delete</a></td>
             </tr>

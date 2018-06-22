@@ -39,12 +39,26 @@ class UserModel extends \MVC\Model\Model
 		return $ret;
 	}
 
-	public function getUser($params = array())
+	public function getUser($rowNumber)
 	{
 		$ret = array();
 		$mysqli = \core\Db::getInstance();
 		
-		//vd($html);
+		$query = "SELECT name, surname FROM user WHERE id = {$rowNumber}";
+		
+		if ($res = $mysqli->query($query))
+		{
+			if ($res->num_rows != 0)
+			{
+				while ($row = $res->fetch_assoc())
+				{
+					$ret[] = $row;
+				}
+			}
+			$res->close();
+		}
+		return $ret;
+		
 	}
 
 	public function createUser($params = array())

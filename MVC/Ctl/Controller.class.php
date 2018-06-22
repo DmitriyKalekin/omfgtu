@@ -9,9 +9,16 @@ abstract class Controller
         echo "abstract ctl run()";
     }
 
-    public function run($action, $request)
+    public function run($action, $rowNumber, $request)
     {
-        return $this->{$action}($request);
+        if(isset($rowNumber))
+        {
+            return $this->{$action}($request, $rowNumber);
+        }
+        else
+        {
+            return $this->{$action}($request);       
+        }
     }
     
     public function do_action($action)
