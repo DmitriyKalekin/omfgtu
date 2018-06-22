@@ -46,8 +46,10 @@ class Router
 
 
         // $xml->{book-first}
+        $ctl = new $class_name();
+        $ctl->action = $this->action;
 
-        return  new $class_name();
+        return  $ctl;
 
 
 

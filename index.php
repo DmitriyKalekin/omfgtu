@@ -11,14 +11,27 @@ header("Content-type: text/html;");
 header("Status: 200 OK");
 
 //$ctl->{action}();
-$ctl->index();
 
 
-$tree_model = new \MVC\Model\TreeModel();
+if ($_SERVER["REQUEST_METHOD"]=="POST")
+{
+    $ret = $ctl->do_action($_POST["action"]);
 
-$result = $tree_model->getTree(); // array("id"=>1)
 
-vd($result);
+
+}
+
+
+
+$ctl->run($_REQUEST);
+
+
+
+
+
+
+
+
 
 
 \core\Db::close();

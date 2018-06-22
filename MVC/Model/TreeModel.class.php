@@ -65,6 +65,56 @@ class TreeModel extends \MVC\Model\Model
 
     }
 
+    public function create_intent(array $params = array()) : bool
+    {
+        $mysqli = \core\Db::getInstance();
+        // PHPUnit assertEq
+        //
+        assert("!empty(\$params['intent_name']);");
+
+        // 0.
+        /*$query = "INSERT [IGNORE] INTO intents (id, pid, uid, name) VALUES
+        (1, 2, 'v12', 'hello'),
+        (1, 2, 'v12', 'hello'),
+        (1, 2, 'v12', 'hello'),
+        (1, 2, 'v12', 'hello'),
+        (1, 2, 'v12', 'hello'),
+        (1, 2, 'v12', 'hello'),
+        (1, 2, 'v12', 'hello');";
+
+
+        // 1.
+        $query = "INSERT IGNORE INTO intents SET
+            id = '',
+            pid = '',
+            uid = '',
+            name='".$mysqli->escape_string($params["name"])."'
+            ;";
+        // 2.
+        $query = "INSERT INTO intents SET name='".$mysqli->escape_string($params["name"])."', cnt=1 ON DUPLICATE KEY UPDATE cnt=cnt+1";
+        */
+
+        $query = "INSERT IGNORE INTO intents SET
+            id = '',
+            pid = '',
+            uid = '',
+            name='".$mysqli->escape_string($params["intent_name"])."'
+            ;";
+
+        return true;
+    }
+
+    public function update_intent()
+    {
+        $query = "UPDATE intents SET
+            id = '',
+            pid = '',
+            name='".$mysqli->escape_string($params["intent_name"])."'
+            WHERE uid = 'v6'
+            ;";
+
+    }
+
 
 }
 
