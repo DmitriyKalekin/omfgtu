@@ -3,22 +3,20 @@ namespace MVC\Ctl;
 
 abstract class Controller
 {
-    public $action = "";
 
-    public function index()
+    public function show()
     {
         echo "abstract ctl run()";
     }
 
-    public function run()
+    public function run($action, $request)
     {
-
-        return $this->{$this->action}($_REQUEST);
+        return $this->{$action}($request);
     }
-
+    
     public function do_action($action)
     {
-        return $this->{"post_".$action}($_POST);
+        return $this->{$action}($_POST);
     }
 
 

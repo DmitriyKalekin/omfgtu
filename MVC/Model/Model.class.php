@@ -3,10 +3,6 @@ namespace MVC\Model;
 
 class Model
 {
-
-
     
 }
-
-
 ?>

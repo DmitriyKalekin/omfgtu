@@ -10,29 +10,13 @@ $ctl = $router->getCtl();
 header("Content-type: text/html;");
 header("Status: 200 OK");
 
-//$ctl->{action}();
-
-
 if ($_SERVER["REQUEST_METHOD"]=="POST")
 {
     $ret = $ctl->do_action($_POST["action"]);
-
-
-
 }
 
-
-
-$ctl->run($_REQUEST);
-
-
-
-
-
-
-
-
-
+$ctl->run($router->action, $_REQUEST);
 
 \core\Db::close();
+
 ?>
