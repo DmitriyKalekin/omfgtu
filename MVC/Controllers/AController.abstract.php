@@ -1,6 +1,10 @@
 <?php
+
 namespace MVC\Controllers;
 
+/**
+*   Абстрактный контроллер
+**/
 abstract class AController
 {
   public $action = "";
@@ -10,17 +14,22 @@ abstract class AController
       echo "abstract controller run()";
   }
 
+  /**
+  *   Обработка GET-запроса
+  **/
   public function run()
-    {
-        return $this->{$this->action}($_REQUEST);
-    }
+  {
+      return $this->{$this->action}($_REQUEST);
+  }
 
-    public function do_action($action)
-    {
-        return $this->{"post_".$action}($_POST);
-    }
+  /**
+  *   Обработка POST-запроса
+  **/
+  public function do_action($action)
+  {
+      return $this->{"post_".$action}($_POST);
+  }
 
 }
 
-
- ?>
+?>

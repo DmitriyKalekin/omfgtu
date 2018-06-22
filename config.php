@@ -1,5 +1,8 @@
 <?php
 
+/**
+*   Массив настроек подключения к БД
+**/
 $config = array(
     "dbhost" =>  "localhost",
     "dbuser" => "root",

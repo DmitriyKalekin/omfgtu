@@ -2,11 +2,17 @@
 
 namespace core;
 
+/**
+*   Класс-роутер для передачи управления контроллерам
+**/
 class Router
 {
   protected $controller = "Default";
   protected $action = "index";
 
+  /**
+  *   Определяет нужный контроллер по URL
+  **/
   public function __construct($url)
   {
     $parts = explode("/", $url);
@@ -27,6 +33,9 @@ class Router
     return array($this->controller, $this->action);
   }
 
+  /**
+  *   Возвращает контроллер
+  **/
   public function getCtl()
   {
     $class_name = "\\MVC\\Controllers\\".UCFirst($this->controller)."Controller";
@@ -34,10 +43,6 @@ class Router
     $controller->action = $this->action;
     return $controller;
   }
-
-  public function getAction()
-  {
-    return $this->action;
-  }
 }
+
 ?>

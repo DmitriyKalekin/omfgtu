@@ -2,11 +2,19 @@
 
 namespace MVC\Models;
 
+/**
+*   Модель сущности "Пользователь"
+*   Сущность содержит атрибуты:
+*     *name - имя
+*     *age - возраст
+**/
 class UsersModel extends \MVC\Models\AModel
 {
+    /**
+    *   Возвращает 10 записей из базы
+    **/
     public function getUsers($params = array())
     {
-
       $ret = array();
       $mysqli = \core\Db::getInstance();
 
@@ -21,7 +29,7 @@ class UsersModel extends \MVC\Models\AModel
 
         if (isset($params["name"]))
         {
-          $where_section .= " AND name LIKE = '".$mysqli->escape_string($params["name"])."_%' ";
+          $where_section .= " AND name LIKE '".$mysqli->escape_string($params["name"])."_%' ";
         }
 
         if (isset($params["age"]))
@@ -31,56 +39,27 @@ class UsersModel extends \MVC\Models\AModel
       }
 
       $query = "SELECT * FROM users WHERE {$where_section} LIMIT 0,10;";
+      //    !!! MYSQLI_USE_RESULT
       if ($res = $mysqli->query($query))
       {
         if ($res->num_rows != 0)
         {
-
             while ($row = $res->fetch_assoc())
             {
               $ret[] = $row;
-
             }
-
         }
         $res->close();
-
-      } else {
-        printf("SQL SELECT query SUCCESS\n");
       }
 
       return $ret;
-
     }
 
-    public function removeUser($id)
+    /**
+    *   Добавляет запись (только при наличии всех параметров)
+    **/
+    public function createUser($params = array())
     {
-      $mysqli = \core\Db::getInstance();
-
-      $where_section = "1";
-
-      {
-        if (isset($id))
-        {
-          $where_section .= " AND id = '".$mysqli->escape_string($id)."' ";
-        }
-      }
-      $query = "DELETE FROM users WHERE {$where_section};";
-      vd($query);
-      if (!($mysqli->query($query)))
-      {
-        printf("SQL DELETE query ERROR\n");
-      }
-      else
-      {
-        printf("SQL DELETE query SUCCESS\n");
-      }
-
-    }
-
-    public function addUser($params = array())
-    {
-      vd($params);
       $mysqli = \core\Db::getInstance();
 
       $values_section = "";
@@ -92,20 +71,14 @@ class UsersModel extends \MVC\Models\AModel
       }
 
       $query = "INSERT INTO users (id, name, age) VALUES (NULL, {$values_section});";
-      vd($query);
-      if (!($mysqli->query($query)))
-      {
-        printf("SQL INSERT query ERROR\n");
-      }
-      else
-      {
-        printf("SQL INSERT query SUCCESS\n");
-      }
+      $mysqli->query($query);
     }
 
+    /**
+    *   Изменяет запись (только при наличии всех параметров)
+    **/
     public function editUser($params = array())
     {
-      vd($params);
       $mysqli = \core\Db::getInstance();
 
       if (!empty($params))
@@ -114,25 +87,34 @@ class UsersModel extends \MVC\Models\AModel
           $age = "'{$mysqli->escape_string($params["age"])}'";
           $where_section = "id = {$mysqli->escape_string($params["id"])}";
           $query = "UPDATE users SET name = {$name}, age = {$age} WHERE {$where_section};";
-          vd($query);
-          if (!($mysqli->query($query)))
-          {
-            printf("SQL UPDATE query ERROR\n");
-          }
-          else
-          {
-            printf("SQL UPDATE query SUCCESS\n");
-          }
-      }
-      else
-      {
-        header( 'Location: /users' );
+          $mysqli->query($query);
       }
     }
 
+    /**
+    *   Удаляет запись по $id
+    **/
+    public function removeUser($id)
+    {
+      $mysqli = \core\Db::getInstance();
+
+      $where_section = "1";
+
+      if (isset($id))
+      {
+        $where_section .= " AND id = '".$mysqli->escape_string($id)."'";
+      }
+
+      $query = "DELETE FROM users WHERE {$where_section};";
+      $mysqli->query($query);
+      //$mysqli->affected_rows  ?
+    }
+
+    /**
+    *   Возвращает запись по $id
+    **/
     public function aboutUser($id)
     {
-      $ret = array();
       $mysqli = \core\Db::getInstance();
 
       $where_section = "1";
@@ -143,28 +125,8 @@ class UsersModel extends \MVC\Models\AModel
       }
 
       $query = "SELECT * FROM users WHERE {$where_section};";
-      vd($query);
-      if ($res = $mysqli->query($query))
-      {
-        if ($res->num_rows != 0)
-        {
-
-            while ($row = $res->fetch_assoc())
-            {
-              $ret[] = $row;
-
-            }
-
-        }
-        $res->close();
-
-      } else {
-        printf("SQL SELECT query ERROR (DETAILS)\n");
-      }
-
-      return $ret;
+      return $mysqli->query($query)->fetch_assoc();
     }
-  }
+}
 
-
- ?>
+?>

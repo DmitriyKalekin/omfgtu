@@ -1,22 +1,77 @@
 <style type='text/css'>
 TABLE {
-width: 300px; /* Ширина таблицы */
-border: 1px solid black;
-border-collapse: collapse;
+  width: 300px;
+  border: 1px solid black;
+  border-collapse: collapse;
 }
 TD, TH {
-padding: 3px; /* Поля вокруг содержимого ячеек */
-border: 1px solid black;
+  padding: 3px;
+  border: 1px solid black;
 }
 TH {
-text-align: center; /* Выравнивание по левому краю */
-background: white; /* Цвет фона */
+  text-align: center;
+  background: white;
+}
+a.navigation {
+  border-radius: 5px;
+  color: #EC4D3C;
+  background-color: white;
+  background-size: 12px 12px;
+  box-shadow: 2px 2px 3px rgba(0,0,0,0.3);
+  margin: 5px;
 }
 a:link, a:visited {
-    color: black;
-    padding: 2px 2px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
+  color: black;
+  padding: 2px 2px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+a.navigation {
+  color: black;
+  background-color: white;
+  margin: 2px;
+  padding: 1px 1px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+div.main {
+  margin: 2% 5% 0% 5%;
+}
+header {
+  display: block;
+  background: gray;
+  width: 100%;
+  margin-bottom: 10px;
+}
+caption {
+  background: gray;
+  color: white;
+  border: 1px solid black;
+}
+div.h1 {
+  margin: 2px;
+  padding: 0px;
+  font-family:Verdana, Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  font-weight: bold;
+  color: #FFFFFF;
+  text-shadow: 2px 2px 3px rgba(0,0,0,0.3);
+}
+div.links {
+  color: black;
+  padding: 10px;
+  text-align:left;
+  width: 100%;
+}
+div.create_button {
+  background-color: white;
+  margin: 5px;
+  padding: 2px;
+}
+h1 {
+  margin: 2px;
+  padding: 0px;
 }
 </style>

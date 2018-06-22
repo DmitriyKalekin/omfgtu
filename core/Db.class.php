@@ -1,25 +1,31 @@
 <?php
 namespace core;
 
+/**
+*   Класс подключения к БД (одиночка)
+**/
 class Db
 {
   private static $instance = null;
   private static $instance_mysqli = null;
 
-
   /**
-  *   Возвращает линк к базе данных
+  *   Создаёт подключение к БД mysql
+  *   Устанавливает кодировку UTF-8
   **/
   private function __construct()
   {
+      require_once(getcwd()."/config.php");
       global $config;
       self::$instance_mysqli = new \mysqli($config["dbhost"], $config["dbuser"], $config["dbpwd"], $config["dbname"]);
       self::$instance_mysqli->query("SET NAMES utf8;");
   }
 
+  /**
+  *   Возвращает линк к базе данных
+  **/
   public static function getInstance()
   {
-    require_once(getcwd()."/config.php");
     if (empty(self::$instance))
     {
       self::$instance = new self();
@@ -28,6 +34,9 @@ class Db
     return self::$instance_mysqli;
   }
 
+  /**
+  *  Закрывает подключние
+  **/
   public static function close()
     {
         if (!empty(self::$instance))
@@ -37,4 +46,5 @@ class Db
 
     }
 }
+
 ?>

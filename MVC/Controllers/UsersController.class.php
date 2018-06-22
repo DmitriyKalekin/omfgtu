@@ -1,20 +1,28 @@
 <?php
+
 namespace MVC\Controllers;
 
-require_once("core/env.php");
-
+/**
+*   Контроллер для сущности "Пользователь"
+**/
 class UsersController extends AController
 {
 
   protected $model = null;
   protected $view = null;
 
+  /**
+  *   Подключает Model и View
+  **/
   public function __construct()
   {
     $this->model = new \MVC\Models\UsersModel();
     $this->view = new \MVC\Views\Users\UsersView();
   }
 
+  /**
+  *   Индексная страница с таблицей
+  **/
   public function index()
   {
     $users = $this->model->getUsers();
@@ -22,54 +30,116 @@ class UsersController extends AController
     echo "$html";
   }
 
-  public function create()
+  /**
+  *   GET-запрос на форму создания
+  **/
+  public function create($params)
   {
-    $html = $this->view->create();
-    echo "html";
+    $html = $this->view->create($params);
+    echo "$html";
   }
 
 
-  //TODO POST_CREATE
-  public function post_create($params)
+  /**
+  *   POST-запрос на форму создания
+  **/
+  public function post_create_user($params)
   {
+    if (
+    !isset($params["name"]) || empty($params["name"]) ||
+    !isset($params["age"]) || empty($params["age"]))
+    {
+      return false;
+    }
 
+    $this->model->createUser($params);
+
+    header("location: /users");
+    return true;
   }
 
+  /**
+  *   GET-запрос на форму изменения
+  **/
   public function edit()
   {
-    if(!empty($_GET["id"]) && !empty($_GET["name"]) && !empty($_GET["age"]))
-    {
-      $this->model->editUser(array('id' => $_GET["id"], 'name' => $_GET["name"], 'age' => $_GET["age"]));
+    $parts = explode("/", $_SERVER["REQUEST_URI"]);
+    if(isset($parts[3])) {
+      $user = $this->model->aboutUser($parts[3]);
+      $html = $this->view->edit($user);
+      echo "$html";
     }
     else
     {
-      printf("Specify what user to edit\n");
-      vd($_GET);
+      header("location: /users");
     }
   }
 
-  public function delete()
+  /**
+  *   POST-запрос на форму изменения
+  **/
+  public function post_edit_user($params)
   {
-    if(!empty($_GET["id"])){
-      $this->model->removeUser($_GET["id"]);
+    if (!isset($params["id"]) || empty($params["id"]) ||
+    !isset($params["name"]) || empty($params["name"]) ||
+    !isset($params["age"]) || empty($params["age"]))
+    {
+      return false;
+    }
+
+    $this->model->editUser($params);
+
+    header("location: /users");
+    return true;
+  }
+
+  /**
+  *   GET-запрос на удаление
+  **/
+  public function delete($params)
+  {
+    $parts = explode("/", $_SERVER["REQUEST_URI"]);
+    if(isset($parts[3])) {
+      $user = $this->model->aboutUser($parts[3]);
+      $html = $this->view->delete($user);
+      echo "$html";
     }
     else
     {
-      printf("Specify what user to delete\n");
-      vd($_GET);
+      header("location: /users");
     }
   }
 
+  /**
+  *   POST-запрос на удаление
+  **/
+  public function post_delete_user($params)
+  {
+    if (!isset($params["id"]) || empty($params["id"]))
+    {
+      return false;
+    }
+
+    $this->model->removeUser($params["id"]);
+
+    header("location: /users");
+    return true;
+  }
+
+  /**
+  *   GET-запрос единичной записи
+  **/
   public function details()
   {
-    if(!empty($_GET["id"])){
-      $user = $this->model->aboutUser($_GET["id"]);
-      vd($user);
+    $parts = explode("/", $_SERVER["REQUEST_URI"]);
+    if(isset($parts[3])) {
+      $user = $this->model->aboutUser($parts[3]);
+      $html = $this->view->details($user);
+      echo "$html";
     }
     else
     {
-      printf("Specify what user to view\n");
-      vd($_GET);
+      header("location: /users");
     }
   }
 }

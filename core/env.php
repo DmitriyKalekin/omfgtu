@@ -1,6 +1,8 @@
 <?php
+
 date_default_timezone_set("Asia/Omsk");
 require_once("config.php");
+
 /**
 * Output
 **/
@@ -60,10 +62,8 @@ function __autoload($class_name)
           $class .= ".class.php";
         }
 
-
         $filename = $class;
         $file = $path."/".$filename;
-
 
         if (file_exists($file) == false)
         {
