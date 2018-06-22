@@ -1,18 +1,10 @@
 <?php
-$config = array();
 
 $config = array(
     "dbhost" =>  "localhost",
-    "dbuser" => "root"
+    "dbuser" => "root",
+    "dbpwd" => "MahD9dsqIt",
+    "dbname" => "server"
 );
 
-$config["dbhost"] = "localhost";
-$config["dbuser"] = "root";
-$config["dbpwd"] = "123123";
-$config["dbname"] = "server";
-
-
-
-
-
-?>
+ ?>

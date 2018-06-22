@@ -1,0 +1,22 @@
+<style type='text/css'>
+TABLE {
+width: 300px; /* Ширина таблицы */
+border: 1px solid black;
+border-collapse: collapse;
+}
+TD, TH {
+padding: 3px; /* Поля вокруг содержимого ячеек */
+border: 1px solid black;
+}
+TH {
+text-align: center; /* Выравнивание по левому краю */
+background: white; /* Цвет фона */
+}
+a:link, a:visited {
+    color: black;
+    padding: 2px 2px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+</style>

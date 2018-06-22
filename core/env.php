@@ -1,7 +1,6 @@
 <?php
-
 date_default_timezone_set("Asia/Omsk");
-
+require_once("config.php");
 /**
 * Output
 **/
@@ -73,23 +72,5 @@ function __autoload($class_name)
 
         include_once($file);
 }
-
-
-
-
-
-
-$mysqli = \core\Db::getInstance();   //new mysqli($config["dbhost"], $config["dbuser"], $config["dbpwd"], $config["dbname"]);
-
-
-
-if ($mysqli->connect_errno)
-{
-	printf("Не удалось подключиться: %s\n", $mysqli->connect_error);
-	exit();
-}
-
-$mysqli->query("SET NAMES utf8;");
-
 
 ?>

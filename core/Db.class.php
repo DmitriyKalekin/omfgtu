@@ -1,49 +1,40 @@
 <?php
 namespace core;
 
-/**
-* TODO:
-* Singleton
-*/
 class Db
 {
-    static $db = null;
+  private static $instance = null;
+  private static $instance_mysqli = null;
 
-    private function __construct()
+
+  /**
+  *   Возвращает линк к базе данных
+  **/
+  private function __construct()
+  {
+      global $config;
+      self::$instance_mysqli = new \mysqli($config["dbhost"], $config["dbuser"], $config["dbpwd"], $config["dbname"]);
+      self::$instance_mysqli->query("SET NAMES utf8;");
+  }
+
+  public static function getInstance()
+  {
+    require_once(getcwd()."/config.php");
+    if (empty(self::$instance))
     {
-
+      self::$instance = new self();
     }
 
-    /**
-    * Возвращает один и тот же линк к базе данных
-    **/
-    public static function getInstance()
-    {
-        global $config;
-        // require / include
-        require_once(getcwd()."/config.php");
+    return self::$instance_mysqli;
+  }
 
-        if (empty(self::$db))
+  public static function close()
+    {
+        if (!empty(self::$instance))
         {
-            // self()
-            self::$db = new \mysqli($config["dbhost"], $config["dbuser"], $config["dbpwd"], $config["dbname"]);
+            self::$instance->close();
         }
 
-        return self::$db;
-
     }
-
-    public static function close()
-    {
-        if (!empty(self::$db))
-        {
-            self::$db->close();
-        }
-
-    }
-
-
 }
-
-
 ?>

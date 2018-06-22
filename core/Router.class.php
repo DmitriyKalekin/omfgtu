@@ -1,62 +1,43 @@
 <?php
-// \core\Router
+
 namespace core;
 
 class Router
 {
-    protected $ctl = "Default";
-    protected $action = "index";
+  protected $controller = "Default";
+  protected $action = "index";
 
+  public function __construct($url)
+  {
+    $parts = explode("/", $url);
+    unset($parts[0]);
 
-
-    public function __construct($url)
+    if (!empty($parts[1]))
     {
-        $parts = explode("/", $url);
-        unset($parts[0]); // ????
+      $ctl = @$parts[1];
 
-        $ctl = @$parts[1];
+      if (!empty($parts[2]))
+      {
         $action = @$parts[2];
-
-        if (isset($parts[2]))
-        {
-            // ....
-
-        }
-
-        if (!empty($parts[2]))
-        {
-            // ....
-        }
-
-        if (empty($ctl))
-        {
-            $ctl = "default";
-        }
-
-
-        $this->ctl = $ctl;
         $this->action = $action;
-
-        return array($ctl, $action);
+      }
+      $this->controller = $ctl;
     }
 
-    public function getCtl()
-    {
-        $class_name = "\\MVC\\Ctl\\".UCFirst($this->ctl)."Controller";
+    return array($this->controller, $this->action);
+  }
 
+  public function getCtl()
+  {
+    $class_name = "\\MVC\\Controllers\\".UCFirst($this->controller)."Controller";
+    $controller = new $class_name();
+    $controller->action = $this->action;
+    return $controller;
+  }
 
-        // $xml->{book-first}
-        $ctl = new $class_name();
-        $ctl->action = $this->action;
-
-        return  $ctl;
-
-
-
-    }
-
-
+  public function getAction()
+  {
+    return $this->action;
+  }
 }
-
-
 ?>
