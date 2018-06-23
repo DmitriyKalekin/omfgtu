@@ -14,7 +14,7 @@
                 <td><?php echo $row['surname'];?></td>
                 <td><a href="/user/info/<?php echo $row['id'];?>">details</a></td>
                 <td><a href="/user/editform">edit</a></td>
-                <td><a href="/user/deleteUser">delete</a></td>
+                <td><a href="/user/deleteUser/<?php echo $row['id'];?>">delete</a></td>
             </tr>
             <?php } // end foreach?>
         </tbody>

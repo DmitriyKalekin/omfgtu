@@ -46,22 +46,12 @@ class UserController extends \MVC\Ctl\Controller
         return true;
     }
 
-	public function deleteForm(array $params)
+	public function deleteUser($params, $rowNumber)
     {
-        $user_model = new \MVC\Model\UserModel();
-		$result = $user_model->getUsers(); // array("id"=>1)
-		\core\Db::close();
-        $view = new \MVC\View\UserDeleteForm();
-        $html = $view->show($result);
-        echo $html;
-	}
-		
-	public function deleteUser($params)
-	{
-		//if (empty($params["id"]))
-            //return false;
+        echo "rowNumber";
+		vd($rowNumber);
 		$user_model = new \MVC\Model\UserModel();
-		$user_model->deleteUser($params); // array("id"=>1)
+		$result = $user_model->deleteUser($params, $rowNumber); // array("id"=>1)
 		header("location: /user/show");
         return true;
 	}

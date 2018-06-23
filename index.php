@@ -12,7 +12,7 @@ header("Status: 200 OK");
 
 if ($_SERVER["REQUEST_METHOD"]=="POST")
 {
-
+    vd($_POST);
     $ret = $ctl->do_action($_POST["action"]);
 }
 

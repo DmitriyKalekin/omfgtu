@@ -77,13 +77,12 @@ class UserModel extends \MVC\Model\Model
 		$mysqli->query($query);
 	}
 
-	public function deleteUser($params = array())
+	public function deleteUser($params, $rowNumber)
 	{
-		//vd($params);
 		$ret = array();
 		$mysqli = \core\Db::getInstance();
 		
-		$where_section .= $mysqli->escape_string($params["id"]);
+		$where_section .= $mysqli->escape_string($rowNumber);
 		$query = "DELETE FROM user WHERE id = {$where_section}";
 		$mysqli->query($query);
 	}
