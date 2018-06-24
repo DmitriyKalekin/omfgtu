@@ -44,11 +44,40 @@ class UserController extends \MVC\Ctl\Controller
         $user_model->createUser($params);
         header("location: /user/show");
         return true;
-    }
+	}
+	
+	// public function updateForm(array $params)
+    // {
+    //     $user_model = new \MVC\Model\UserModel();
+	// 	$result = $user_model->getUsers(); // array("id"=>1)
+	// 	\core\Db::close();
+    //     $view = new \MVC\View\UserCreateForm();
+    //     $html = $view->show($result);
+    //     echo $html;
+	// }
+	
+	public function updateForm($params, $rowNumber)
+    {
+		$user_model = new \MVC\Model\UserModel();
+		$result = $user_model->getUser($rowNumber); // array("id"=>1)
+		$view = new \MVC\View\UserUpdateForm();
+		$res = $view->show($result, $rowNumber);
+		//vd($res);
+	}
+	
+	public function updateUser($params)
+	{
+		vd($params);
+		if (empty($params["name"]) && empty($params["surname"]) && empty($params["id"]))
+			return false;
+		$user_model = new \MVC\Model\UserModel();
+        $user_model->updateUser($params);
+        header("location: /user/show");
+        return true;
+	}
 
 	public function deleteUser($params, $rowNumber)
     {
-        echo "rowNumber";
 		vd($rowNumber);
 		$user_model = new \MVC\Model\UserModel();
 		$result = $user_model->deleteUser($params, $rowNumber); // array("id"=>1)

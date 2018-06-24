@@ -86,5 +86,19 @@ class UserModel extends \MVC\Model\Model
 		$query = "DELETE FROM user WHERE id = {$where_section}";
 		$mysqli->query($query);
 	}
+	public function updateUser($params)
+	{
+		$ret = array();
+		$mysqli = \core\Db::getInstance();
+		$id = $mysqli->escape_string($params["id"]);
+		$name = $mysqli->escape_string($params["name"]);
+		$surname = $mysqli->escape_string($params["surname"]);
+		$query = "UPDATE user SET name="."'".$name."', surname="."'".$surname."' WHERE id=$id";
+		$mysqli->query($query);
+		//".'$surname';
+		//vd($id);
+		//$query = "DELETE FROM user WHERE id = {$where_section}";
+		//$mysqli->query($query);
+	}
 }
 ?>
