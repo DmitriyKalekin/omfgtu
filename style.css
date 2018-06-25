@@ -1,24 +1,29 @@
 <style type='text/css'>
 TABLE {
-  width: 300px;
+  width: 100%;
   border: 1px solid black;
   border-collapse: collapse;
+  display: grid inline;
+  justify-content: center;
+  grid-area: auto;
+  overflow: auto;
+}
+TABLE.table
+{
+  width: 100%;
+  display: grid inline;
+  justify-content: center;
+    grid-area: auto;
+  overflow: auto;
 }
 TD, TH {
   padding: 3px;
   border: 1px solid black;
+  text-align: center;
 }
 TH {
   text-align: center;
   background: white;
-}
-a.navigation {
-  border-radius: 5px;
-  color: #EC4D3C;
-  background-color: white;
-  background-size: 12px 12px;
-  box-shadow: 2px 2px 3px rgba(0,0,0,0.3);
-  margin: 5px;
 }
 a:link, a:visited {
   color: black;
@@ -28,10 +33,13 @@ a:link, a:visited {
   display: inline-block;
 }
 a.navigation {
+  border-radius: 0px 15px 0px 0px;
+  border: 1px solid gray;
   color: black;
-  background-color: white;
+  background-color: #FFFFFF;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
   margin: 2px;
-  padding: 1px 1px;
+  padding: 3px;
   text-align: center;
   text-decoration: none;
   display: inline-block;

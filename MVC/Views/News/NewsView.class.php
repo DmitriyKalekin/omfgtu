@@ -22,7 +22,7 @@ class NewsView {
     echo "<div class=create_button>";
     echo "<a class=navigation href = '/news/create'>create new</a>";
     echo "</div>";
-    echo "<table cellspacing=0>";
+    echo "<table cellspacing=0 class=table>";
     echo "<caption><b>News</b></caption>";
     echo "<tr align='center'>";
     echo "<th><b>title</b></th><th><b>description</b></th><th><b>tag</b></th><th><b>controls</b></th>";
@@ -128,7 +128,7 @@ class NewsView {
     echo "<link rel='stylesheet' href='/style.css'/>";
     echo "<div class=main>";
     require_once('MVC/Views/HeaderView.php');
-    echo "<table cellspacing=0>";
+    echo "<table cellspacing=0 class=table>";
     echo "<caption>News</caption>";
     echo "<tr align='center'>";
     echo "<th><b>title</b></th><th><b>description</b></th><th><b>tag</b></th>";

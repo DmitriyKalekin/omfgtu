@@ -22,7 +22,7 @@ class UsersView {
     echo "<div class=create_button>";
     echo "<a class=navigation href = '/users/create'>create new</a>";
     echo "</div>";
-    echo "<table cellspacing=0>";
+    echo "<table cellspacing=0 class=table>";
     echo "<caption><b>Users</b></caption>";
     echo "<tr align='center'>";
     echo "<th><b>name</b></th><th><b>age</b></th><th><b>controls</b></th>";
@@ -122,7 +122,7 @@ class UsersView {
     echo "<link rel='stylesheet' href='/style.css'/>";
     echo "<div class=main>";
     require_once('MVC/Views/HeaderView.php');
-    echo "<table cellspacing=0>";
+    echo "<table cellspacing=0 class=table>";
     echo "<caption>Users</caption>";
     echo "<tr align='center'>";
     echo "<th><b>name</b></th><th><b>age</b></th>";
