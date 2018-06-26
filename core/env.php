@@ -79,17 +79,17 @@ function __autoload($class_name)
 
 
 
-$mysqli = \core\Db::getInstance();   //new mysqli($config["dbhost"], $config["dbuser"], $config["dbpwd"], $config["dbname"]);
+  $mysqli = \core\Db::getInstance();
 
 
 
-if ($mysqli->connect_errno)
-{
-	printf("Не удалось подключиться: %s\n", $mysqli->connect_error);
-	exit();
-}
+  if ($mysqli->connect_errno)
+  {
+  	printf("Не удалось подключиться: %s\n", $mysqli->connect_error);
+  	exit();
+  }
 
-$mysqli->query("SET NAMES utf8;");
+  $mysqli->query("SET NAMES utf8;");
 
 
 ?>
